@@ -86,12 +86,17 @@ Parameter     NONE
 Methods       POST
 */
 Router.post("/is/add", async(req,res)=>{
+
+    try{
     const {newBook}=req.body;
     //database.books.push(newBook);
     
     const addNewBook=await BookModel.create(newBook);
 
     return res.json({books:addNewBook});  
+    }catch(error){
+        return res.json({error:error.message});
+    }
 
 });
 
